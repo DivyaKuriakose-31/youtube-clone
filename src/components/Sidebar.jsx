@@ -1,49 +1,46 @@
 import React from 'react';
-import { Stack, Button } from '@mui/material';
-import { Home, Compass, PlaySquare, Music, Gamepad, Tv } from 'lucide-react';
+import { Box, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Home, Code, Blocks, FileJson, Terminal, Cpu, Binary, Sigma, HelpCircle } from 'lucide-react';
 
 const categories = [
-  { name: 'New', icon: <Home size={18} /> },
-  { name: 'Trending', icon: <Compass size={18} /> },
-  { name: 'Coding', icon: <PlaySquare size={18} /> },
-  { name: 'Music', icon: <Music size={18} /> },
-  { name: 'Gaming', icon: <Gamepad size={18} /> },
-  { name: 'Movies', icon: <Tv size={18} /> },
+  { name: 'All', icon: Home },
+  { name: 'Coding', icon: Code },
+  { name: 'React', icon: Blocks },
+  { name: 'JavaScript', icon: FileJson },
+  { name: 'Python', icon: Terminal },
+  { name: 'Algorithms', icon: Cpu },
+  { name: 'Physics', icon: Binary },
+  { name: 'Mathematics', icon: Sigma },
+  { name: 'Science', icon: HelpCircle },
 ];
 
-const Sidebar = ({ selectedCategory, setSelectedCategory }) => (
-  <Stack
-    direction="row"
-    sx={{
-      overflowY: 'auto',
-      height: { sx: 'auto', md: '92vh' },
-      flexDirection: { md: 'column' },
-      backgroundColor: '#0f0f0f',
-      px: { sx: 0, md: 2 },
-      minWidth: '200px'
-    }}
-  >
-    {categories.map((category) => (
-      <Button
-        onClick={() => setSelectedCategory(category.name)}
-        style={{
-          background: category.name === selectedCategory ? '#f00' : 'transparent',
-          color: '#fff',
-          justifyContent: 'flex-start',
-          borderRadius: '10px',
-          margin: '5px 0',
-          textTransform: 'none',
-          padding: '10px 20px'
-        }}
-        key={category.name}
-        startIcon={category.icon}
-      >
-        <span style={{ opacity: category.name === selectedCategory ? '1' : '0.8' }}>
-          {category.name}
-        </span>
-      </Button>
-    ))}
-  </Stack>
-);
+const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
+  return (
+    <Box sx={{ width: '72px', backgroundColor: '#0f0f0f', borderRight: '1px solid #272727', overflowY: 'auto' }}>
+      <List disablePadding>
+        {categories.map((category) => {
+          const IconComponent = category.icon;
+          const isSelected = selectedCategory === category.name;
+          
+          return (
+            <ListItemButton
+              key={category.name}
+              onClick={() => setSelectedCategory(category.name)}
+              sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '12px 0', minHeight: '74px', backgroundColor: isSelected ? '#272727' : 'transparent', '&:hover': { backgroundColor: '#272727' } }}
+            >
+              <ListItemIcon sx={{ color: '#ffffff', minWidth: 'auto', marginBottom: '4px' }}>
+                <IconComponent size={20} strokeWidth={isSelected ? 2.5 : 1.75} />
+              </ListItemIcon>
+              <ListItemText 
+                primary={category.name} 
+                primaryTypographyProps={{ fontSize: '10px', fontWeight: isSelected ? 'bold' : 'normal', textAlign: 'center', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '64px' }} 
+              />
+            </ListItemButton>
+          );
+        })}
+      </List>
+    </Box>
+  );
+};
 
 export default Sidebar;

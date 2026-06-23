@@ -1,46 +1,44 @@
-import React, { useState } from 'react';
-import { Stack, IconButton, Typography } from '@mui/material';
-import { Search } from 'lucide-react';
+import React from 'react';
+import { AppBar, Toolbar, Box, InputBase, IconButton, Avatar } from '@mui/material';
+import { Menu, Search, Youtube } from 'lucide-react';
 
-const Navbar = ({ setSearchTerm }) => {
-  const [input, setInput] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (input) {
-      setSearchTerm(input);
-    }
-  };
-
+const Navbar = () => {
   return (
-    <Stack 
-      direction="row" 
-      alignItems="center" 
-      p={2} 
-      sx={{ position: 'sticky', background: '#0f0f0f', top: 0, justifyContent: 'space-between', zIndex: 10 }}
-    >
-      <Stack direction="row" alignItems="center" gap={1}>
-        {/* Simple inline Red SVG for the YouTube Logo */}
-        <svg viewBox="0 0 24 24" width="32" height="32" fill="red">
-          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-        </svg>
-        <Typography variant="h6" fontWeight="bold" sx={{ color: '#fff', display: { xs: 'none', sm: 'block' } }}>
-          YouTube
-        </Typography>
-      </Stack>
+    <AppBar position="fixed" elevation={0} sx={{ backgroundColor: '#0f0f0f', borderBottom: '1px solid #272727', zIndex: 1201 }}>
+      <Toolbar sx={{ display: 'flex', justifyContent: 'between', minHeight: '56px' }}>
+        
+        {/* Left Section: Logo controls */}
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <IconButton color="inherit">
+            <Menu size={20} />
+          </IconButton>
+          <Box sx={{ display: 'flex', alignItems: 'center', color: '#ff0000', cursor: 'pointer' }}>
+            <Youtube size={28} fill="#ff0000" />
+            <Box component="span" sx={{ color: '#ffffff', fontWeight: 'bold', fontSize: '18px', marginLeft: '4px', letterSpacing: '-0.5px' }}>
+              YouTube
+            </Box>
+          </Box>
+        </Box>
 
-      <form onSubmit={handleSubmit} style={{ display: 'flex', borderRadius: 20, border: '1px solid #303030', backgroundColor: '#121212', paddingLeft: 15 }}>
-        <input
-          placeholder="Search..."
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          style={{ border: 'none', outline: 'none', width: '250px', background: 'transparent', color: '#fff', padding: '10px' }}
-        />
-        <IconButton type="submit" sx={{ p: '10px', color: '#fff' }}>
-          <Search size={18} />
-        </IconButton>
-      </form>
-    </Stack>
+        {/* Center Section: Search query box */}
+        <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, justifyContent: 'center' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#121212', border: '1px solid #303030', borderRadius: '40px 0 0 40px', paddingLeft: 2, width: '100%', maxWidth: '500px' }}>
+            <InputBase placeholder="Search" sx={{ width: '100%', fontSize: '14px', color: '#ffffff' }} />
+          </Box>
+          <IconButton sx={{ backgroundColor: '#222222', border: '1px solid #303030', borderLeft: 'none', borderRadius: '0 40px 40px 0', padding: '6px 20px', color: '#aaaaaa', '&:hover': { backgroundColor: '#333333' } }}>
+            <Search size={18} />
+          </IconButton>
+        </Box>
+
+        {/* Right Section: User utilities channel profile */}
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Avatar sx={{ width: 32, height: 32, backgroundColor: '#ec407a', fontSize: '14px', fontWeight: 'bold', cursor: 'pointer' }}>
+            NI
+          </Avatar>
+        </Box>
+
+      </Toolbar>
+    </AppBar>
   );
 };
 
