@@ -1,12 +1,14 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://youtube-v31.p.rapidapi.com';
+export const BASE_URL = 'https://youtube-v31.p.rapidapi.com';
 
 const options = {
-  params: { maxResults: '50' },
+  params: {
+    maxResults: '50'
+  },
   headers: {
-    // Note: You will need a free RapidAPI Key from the "YouTube v3.1" API to fetch live data
-    'X-RapidAPI-Key': 'YOUR_RAPIDAPI_KEY_HERE', 
+    // Your exact API key from the playground dashboard
+    'X-RapidAPI-Key': '4243f7dd0emsh818944a3325958bp1f38d1jsneed12a609d3d', 
     'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com'
   }
 };
